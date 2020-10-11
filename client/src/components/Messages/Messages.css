@@ -1,0 +1,63 @@
+.all-messages {
+  width: 100%;
+  height: 70%;
+  background-color: black;
+  overflow: auto;
+  scroll-snap-align: end;
+}
+.admin-msg {
+  color: white;
+  opacity: 0.7;
+  text-align: center;
+  font-size: 0.7em;
+  padding: 4px;
+}
+
+.user-msgs {
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.my-msg {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.my-msg > p {
+  display: inline-block;
+}
+
+.my-text {
+  padding: 7px;
+  background-color: steelblue;
+  border-radius: 20px 20px 20px 0;
+  max-width: 70%;
+  height: auto;
+}
+
+.my-name {
+  color: white;
+  font-size: 13px;
+  margin-right: 3px;
+  padding-top: 13px;
+  opacity: 0.7;
+}
+
+.user-msgs > p {
+  display: inline-block;
+}
+
+.msg-text {
+  padding: 7px;
+  background-color: steelblue;
+  border-radius: 50px 50px 0 50px;
+}
+
+.user-name {
+  color: white;
+  font-size: 13px;
+  margin-left: 3px;
+  opacity: 0.7;
+}
