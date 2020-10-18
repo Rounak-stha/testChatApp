@@ -27,38 +27,3 @@
     height: 100%;
   }
 }
-
-.inp_btn-container {
-  width: 100%;
-  height: 15%;
-  background-color: black;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 0 0 20px 20px;
-}
-
-.msg-input {
-  width: 80%;
-  height: 50%;
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 35px;
-  margin-left: 5%;
-}
-
-.msg-btn {
-  width: 10%;
-  height: 55%;
-  background-color: inherit;
-  border: none;
-  color: steelblue;
-  font-size: 150%;
-}
-
-textarea {
-  resize: none;
-  color: white;
-  padding-left: 10px;
-  padding-top: 7px;
-}

@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import {BrowserRouter as Router, Redirect} from 'react-router-dom'
 import io from "socket.io-client";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
-import Messages from "../Messages/Messages";
+import MainBody from '../MainBody/MainBody'
 import Header from '../Header/Header'
+
 import "./chat.css";
 
 let socket;
-let endPoint = "https://chatserver999.herokuapp.com/";
+let endPoint = "127.0.0.1:9999";
 
 function Chat() {
   const [nickName, setNickName] = useState("");
   const [room, setRoom] = useState("");
-  const [myMsg, setMyMsg] = useState('')
-  const [messages, setMessages] = useState([]);
+  const [isSocketDefined, setIsSocketDefined] = useState(false)
+  
+  
   const [redirect, setRedirect] = useState(false)
 
 
   useEffect(() => {
+    console.log('chatjs')
     let nickName
     let room
     
@@ -39,10 +40,12 @@ function Chat() {
     socket = io(endPoint);
 
 
-    socket.emit("addMe", { name: nickName, room }, ({error, myName}) => {
+    socket.emit("addMe", { name: nickName, room }, ({error, nameObj}) => {
       if (error)  setRedirect(true)
-      else console.log(`${myName} has joined`)
+      else console.log(`${nameObj.name} has joined`)
     });
+
+    setIsSocketDefined(true)
 
     return () => {
       console.log('disconnect')
@@ -52,21 +55,8 @@ function Chat() {
   }, [])
 
 
-  useEffect(() => {
-    socket.on('message', ({name, text}) => {
-      let newMsgArr = [...messages, {user: name, text}]
-      setMessages(newMsgArr)
-    })
-  }, [messages])
 
-  const handleMsgs = (e) => {
-      if (e.keyCode === 13 || e.target.name === 'sendBtn' || e.currentTarget.name === 'sendBtn') {
-        socket.emit('userMsg', {name: nickName, room, myMsg})
-        setMessages([...messages, {user: nickName, text: myMsg}])
-        setMyMsg('')
-      }
-      
-  }
+
 
   return (
     redirect ? (<Router><Redirect exact to={{
@@ -76,24 +66,7 @@ function Chat() {
     (<div className="message-page-container">
       <div className="main-container">
         <Header room={room} />
-        <Messages messages={messages} nickName={nickName} />
-        <div className="inp_btn-container">
-          <textarea 
-            value={myMsg} 
-            onChange={(e) => setMyMsg(e.target.value)} 
-            onKeyDown={(e) => handleMsgs(e)}
-            className="msg-input" 
-            type="text" 
-          />
-          <button 
-            name='sendBtn'
-            className="msg-btn" 
-            type="submit"
-            onClick={(e) => handleMsgs(e)}  
-          >
-            <FontAwesomeIcon onClick={(e) => false} icon={faPaperPlane} /> 
-          </button>
-        </div>
+        {isSocketDefined ? (<MainBody socket={socket} name={nickName} room={room}/>) : null}
       </div>
     </div>)
   );

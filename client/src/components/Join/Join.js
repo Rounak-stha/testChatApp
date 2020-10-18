@@ -20,17 +20,18 @@ function Join() {
   return (
     <div className="join-form">
         <select
-        className="room-select"
-        name="roomname"
-        value={roomName}
-        onChange={(e) => handleInput(e.target)}
-      >
-        <option value="default">Select a room</option>
-        <option value="haha">haha</option>
-        <option value="lolol">lolol</option>
-        <option value="insane">insane</option>
-        <option value="qwerty">qwerty</option>
+          className="room-select"
+          name="roomname"
+          value={roomName}
+          onChange={(e) => handleInput(e.target)}
+        >
+          <option value="default">Select a room</option>
+          <option value="haha">haha</option>
+          <option value="lolol">lolol</option>
+          <option value="insane">insane</option>
+          <option value="qwerty">qwerty</option>
       </select>
+
       <input
         className="nickname-input"
         name="nickname"
